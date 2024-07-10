@@ -1,0 +1,19 @@
+
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+<changeSet author="jgz" id="ve-2" context="prod">
+    <loadData commentLineStartsWith="#"
+              encoding="UTF-8"
+              file="liquibase/initial_items.csv"
+              quotchar="&#34;"
+              separator=","
+              tableName="Item">
+        <column name="item_id" type="STRING"/>
+        <column name="item_name" type="STRING"/>
+        <column name="item_description" type="STRING"/>
+    </loadData>
+</changeSet>
+</databaseChangeLog>

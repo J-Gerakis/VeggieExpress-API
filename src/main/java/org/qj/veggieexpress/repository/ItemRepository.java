@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static java.util.spi.ToolProvider.findFirst;
-
 @Repository
 public class ItemRepository {
 
@@ -46,7 +44,7 @@ public class ItemRepository {
     }
 
     public Optional<Item> findItemById(UUID id) {
-        return items.stream().filter(item -> item.getItemId() == id).findFirst();
+        return items.stream().filter(item -> item.getItemId().equals(id)).findFirst();
     }
 
 }
