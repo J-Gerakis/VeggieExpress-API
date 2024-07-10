@@ -1,0 +1,31 @@
+
+type Item {
+    itemId: ID!
+    itemName: String
+    itemDescription: String
+}
+
+type OrderItem {
+    orderRef: ID!
+    item: Item
+    quantity: Int
+}
+
+type Order {
+    orderId : ID!
+    orderContent: [OrderItem]
+    customerId: ID!
+    deliveryAddress: String
+    note: String
+}
+
+type Query {
+    listAllItems: [Item]
+    getItemById(id:String): Item
+    searchItem(search:String): [Item]
+    getOrderById(id:String): Order
+}
+
+type Mutation {
+    addItem(name:String, description:String): String
+}
