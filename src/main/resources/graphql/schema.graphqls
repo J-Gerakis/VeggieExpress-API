@@ -3,6 +3,7 @@ type Item {
     itemId: ID!
     itemName: String
     itemDescription: String
+    itemAvailable: Boolean
 }
 
 type OrderItem {

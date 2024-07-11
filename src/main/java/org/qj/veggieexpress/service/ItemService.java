@@ -28,8 +28,10 @@ public class ItemService {
     public UUID save(String name, String description) {
         Item item = Item.builder()
                 .itemId(UUID.randomUUID())
-                        .itemName(name)
-                                .itemDescription(description).build();
+                .itemName(name)
+                .itemDescription(description)
+                .itemAvailable(true)
+                .build();
 
         itemRepository.addItem(item);
         return item.getItemId();

@@ -2,6 +2,25 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="ve-01" author="jgz" context="prod, test">
+
+        <createTable tableName="Customer">
+            <column name="customer_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="customer_phone" type="varchar(16)">
+                <constraints nullable="false" />
+            </column>
+            <column name="customer_contact_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="customer_delivery_address" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="customer_note" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
         <createTable tableName="Item">
             <column name="item_id" type="varchar(36)">
                 <constraints primaryKey="true" nullable="false" />
@@ -12,15 +31,30 @@
             <column name="item_description" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="item_available" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
         </createTable>
 
         <createTable tableName="Order">
             <column name="order_id" type="varchar(36)">
                 <constraints primaryKey="true" nullable="false" />
             </column>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_customer" references="Customer(customer_id)" />
+            </column>
+            <column name="status" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="paid" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
         </createTable>
 
         <createTable tableName="OrderItem">
+            <column name="order_item_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
             <column name="order_id" type="varchar(36)">
                 <constraints nullable="false" foreignKeyName="fk_order" references="Order(order_id)" />
             </column>

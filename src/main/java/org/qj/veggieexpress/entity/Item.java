@@ -13,4 +13,5 @@ public class Item {
     private UUID itemId;
     private String itemName;
     private String itemDescription;
+    private boolean itemAvailable;
 }
