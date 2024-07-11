@@ -20,6 +20,10 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
+    public List<Item> search(String term) {
+        return itemRepository.findByName(term);
+    }
+
     public Item getById(UUID id) {
         return itemRepository.findItemById(id).orElse(null);
         //future exception here

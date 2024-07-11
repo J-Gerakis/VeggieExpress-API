@@ -25,6 +25,11 @@ public class OrderController {
     }
 
     @QueryMapping
+    public List<Item> searchItem(@Argument("searchTerm") String term) {
+        return itemService.search(term);
+    }
+
+    @QueryMapping
     public Item getItemById(@Argument String id) {
         return itemService.getById(UUID.fromString(id));
     }

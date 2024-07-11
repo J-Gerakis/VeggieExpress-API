@@ -21,34 +21,19 @@ public class ItemRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    //private List<Item> items;
     //replace with H2 database
-    public ItemRepository() {
-        //some test values
-//
-//        items = new ArrayList<>();
-//        items.add(Item.builder()
-//                 .itemId(UUID.randomUUID())
-//                .itemName("Cucumber")
-//                .itemDescription("")
-//                .build());
-//
-//        items.add(Item.builder()
-//                .itemId(UUID.randomUUID())
-//                .itemName("Tomato")
-//                .itemDescription("")
-//                .build());
-//
-//        items.add(Item.builder()
-//                .itemId(UUID.randomUUID())
-//                .itemName("Watermelon")
-//                .itemDescription("")
-//                .build());
-    }
+    public ItemRepository() { }
 
     public List<Item> findAll() {
         TypedQuery<ItemDAO> query1 = entityManager.createNamedQuery("getAllItem", ItemDAO.class);
         return query1.getResultList().stream().map(EntityMapper::map).toList();
+    }
+
+    public List<Item> findByName(String name) {
+        TypedQuery<ItemDAO> squery = entityManager.createNamedQuery("getItemByName", ItemDAO.class)
+                .setParameter("name", "'%"+name+"%'");
+
+        return squery.getResultList().stream().map(EntityMapper::map).toList();
     }
 
     public UUID addItem(Item item) {

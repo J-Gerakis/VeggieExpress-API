@@ -23,7 +23,7 @@ type Order {
 type Query {
     listAllItems: [Item]
     getItemById(id:String): Item
-    searchItem(search:String): [Item]
+    searchItem(searchTerm:String): [Item]
     getOrderById(id:String): Order
 }
 
