@@ -4,7 +4,7 @@
     <changeSet id="ve-01" author="jgz" context="prod, test">
 
         <createTable tableName="Customer">
-            <column name="customer_id" type="bigint" autoIncrement="true">
+            <column name="customer_id" type="uuid" autoIncrement="1">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="customer_phone" type="varchar(16)">
@@ -22,7 +22,7 @@
         </createTable>
 
         <createTable tableName="Item">
-            <column name="item_id" type="varchar(36)">
+            <column name="item_id" type="uuid" autoIncrement="1">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="item_name" type="varchar(255)">
@@ -36,11 +36,11 @@
             </column>
         </createTable>
 
-        <createTable tableName="Order">
-            <column name="order_id" type="varchar(36)">
+        <createTable tableName="VOrder">
+            <column name="order_id" type="uuid" autoIncrement="1">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="customer_id" type="bigint">
+            <column name="customer_id" type="uuid">
                 <constraints nullable="false" foreignKeyName="fk_customer" references="Customer(customer_id)" />
             </column>
             <column name="status" type="int">
@@ -52,13 +52,13 @@
         </createTable>
 
         <createTable tableName="OrderItem">
-            <column name="order_item_id" type="bigint" autoIncrement="true">
+            <column name="order_item_id" type="uuid" autoIncrement="1">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="order_id" type="varchar(36)">
-                <constraints nullable="false" foreignKeyName="fk_order" references="Order(order_id)" />
+            <column name="order_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="fk_order" references="VOrder(order_id)" />
             </column>
-            <column name="item_id" type="varchar(36)">
+            <column name="item_id" type="uuid">
                 <constraints nullable="false" foreignKeyName="fk_item" references="Item(item_id)" />
             </column>
             <column name="quantity" type="int">

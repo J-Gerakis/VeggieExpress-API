@@ -8,7 +8,7 @@ import java.util.UUID;
 public class EntityMapper {
     public static Item map(ItemDAO dao) {
         return Item.builder()
-                .itemId(UUID.fromString(dao.getItemId()))
+                .itemId(dao.getItemId())
                 .itemName(dao.getItemName())
                 .itemDescription(dao.getItemDesc())
                 .itemAvailable(dao.isItemAvailable())
@@ -17,7 +17,7 @@ public class EntityMapper {
 
     public static ItemDAO map(Item item) {
         ItemDAO dao = new ItemDAO();
-        dao.setItemId(item.getItemId().toString());
+        dao.setItemId(item.getItemId());
         dao.setItemName(item.getItemName());
         dao.setItemDesc(item.getItemDescription());
         dao.setItemAvailable(item.isItemAvailable());

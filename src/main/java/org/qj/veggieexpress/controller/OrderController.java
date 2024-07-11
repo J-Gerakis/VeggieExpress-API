@@ -30,7 +30,7 @@ public class OrderController {
     }
 
     @MutationMapping
-    public String addItem(@Argument String name, @Argument String description) {
-        return itemService.save(name, description).toString();
+    public UUID addItem(@Argument String name, @Argument String description) {
+        return itemService.save(name, description);
     }
 }

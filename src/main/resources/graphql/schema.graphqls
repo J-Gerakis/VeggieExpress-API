@@ -28,5 +28,5 @@ type Query {
 }
 
 type Mutation {
-    addItem(name:String, description:String): String
+    addItem(name:String, description:String): ID
 }

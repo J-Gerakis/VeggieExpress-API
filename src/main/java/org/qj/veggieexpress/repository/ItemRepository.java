@@ -2,6 +2,7 @@ package org.qj.veggieexpress.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.qj.veggieexpress.entity.Item;
 import org.qj.veggieexpress.mapper.EntityMapper;
@@ -46,16 +47,18 @@ public class ItemRepository {
     }
 
     public List<Item> findAll() {
-        return entityManager.find();
+        TypedQuery<ItemDAO> query1 = entityManager.createNamedQuery("getAllItem", ItemDAO.class);
+        return query1.getResultList().stream().map(EntityMapper::map).toList();
     }
 
-    public void addItem(Item item) {
+    public UUID addItem(Item item) {
         ItemDAO dao = EntityMapper.map(item);
         entityManager.persist(dao);
+        entityManager.flush();
+        return dao.getItemId();
     }
 
     public Optional<Item> findItemById(UUID id) {
-        //return items.stream().filter(item -> item.getItemId().equals(id)).findFirst();
         ItemDAO dao = entityManager.find(ItemDAO.class, id.toString());
         if (dao == null) { return Optional.empty(); }
         return Optional.of(EntityMapper.map(dao));

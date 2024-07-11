@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "Customer")
 @Getter
@@ -12,8 +14,8 @@ public class CustomerDAO {
 
     @Id
     @Column(name="customer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long customerId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID customerId;
 
     @Column(name = "customer_name")
     String customerName;

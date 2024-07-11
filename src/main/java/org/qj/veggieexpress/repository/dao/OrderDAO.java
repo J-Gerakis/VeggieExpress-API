@@ -5,15 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
-@Table(name = "Order")
+@Table(name = "VOrder")
 @Getter
 @Setter
 public class OrderDAO {
     @Id
     @Column(name = "order_id")
-    String orderId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID orderId;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
