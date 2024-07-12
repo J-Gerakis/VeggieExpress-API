@@ -12,6 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NamedQuery(name="getAllItem", query="select i from ItemDAO i")
+@NamedQuery(name="getItem", query="select i from ItemDAO i where i = i")
 @NamedNativeQuery(name="getItemByName", query="select * from Item i where i.item_name like :name", resultClass = ItemDAO.class)
 public class ItemDAO {
 

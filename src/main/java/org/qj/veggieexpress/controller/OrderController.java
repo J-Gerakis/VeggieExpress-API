@@ -1,41 +1,25 @@
 package org.qj.veggieexpress.controller;
 
-import org.qj.veggieexpress.entity.Item;
-import org.qj.veggieexpress.service.ItemService;
+import org.qj.veggieexpress.entity.Order;
+import org.qj.veggieexpress.service.OrderService;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller
 public class OrderController {
 
-    private final ItemService itemService;
+    private final OrderService orderService;
 
-    public OrderController(ItemService itemService) {
-        this.itemService = itemService;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @QueryMapping
-    public List<Item> listAllItems() {
-        return itemService.getAll();
-    }
-
-    @QueryMapping
-    public List<Item> searchItem(@Argument("searchTerm") String term) {
-        return itemService.search(term);
-    }
-
-    @QueryMapping
-    public Item getItemById(@Argument String id) {
-        return itemService.getById(UUID.fromString(id));
-    }
-
-    @MutationMapping
-    public UUID addItem(@Argument String name, @Argument String description) {
-        return itemService.save(name, description);
+    public Order getOrderById(@Argument String id) {
+        UUID uuid = UUID.fromString(id);
+        return orderService.getOrderById(uuid);
     }
 }

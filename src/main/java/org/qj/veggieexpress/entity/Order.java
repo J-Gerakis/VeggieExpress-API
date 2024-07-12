@@ -4,7 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Setter
@@ -12,9 +14,11 @@ import java.util.UUID;
 @Builder
 public class Order {
     private UUID orderID;
-    private List<OrderItem> orderContent;
+    private Set<OrderItem> orderContent;
     private UUID customerID;
     private String note;
     private String deliveryAddress;
+    private LocalDateTime createdOn;
+    private LocalDateTime deliveredOn;
 
 }

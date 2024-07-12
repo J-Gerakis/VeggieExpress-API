@@ -21,7 +21,6 @@ public class ItemRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    //replace with H2 database
     public ItemRepository() { }
 
     public List<Item> findAll() {

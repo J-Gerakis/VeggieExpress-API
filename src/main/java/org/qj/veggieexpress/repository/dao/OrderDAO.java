@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,6 +25,18 @@ public class OrderDAO {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name ="order_id")
     Set<OrderItemDAO> orderItemDAO;
+
+    @Column(name = "status")
+    Integer status;
+
+    @Column(name = "paid")
+    Boolean paid;
+
+    @Column(name = "created_on")
+    LocalDateTime createdOn;
+
+    @Column(name = "delivered_on")
+    LocalDateTime deliveredOn;
 
     public OrderDAO() {}
 }

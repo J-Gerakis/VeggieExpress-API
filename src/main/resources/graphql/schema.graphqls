@@ -18,6 +18,8 @@ type Order {
     customerId: ID!
     deliveryAddress: String
     note: String
+    status: Int
+    paid: Boolean
 }
 
 type Query {
