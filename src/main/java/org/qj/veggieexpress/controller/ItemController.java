@@ -1,5 +1,6 @@
 package org.qj.veggieexpress.controller;
 
+import org.qj.veggieexpress.controller.dto.NewItemRequestDTO;
 import org.qj.veggieexpress.entity.Item;
 import org.qj.veggieexpress.service.ItemService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -35,7 +36,7 @@ public class ItemController {
     }
 
     @MutationMapping
-    public UUID addItem(@Argument String name, @Argument String description) {
-        return itemService.save(name, description);
+    public UUID addItem(@Argument NewItemRequestDTO itemRequest) {
+        return itemService.create(itemRequest);
     }
 }

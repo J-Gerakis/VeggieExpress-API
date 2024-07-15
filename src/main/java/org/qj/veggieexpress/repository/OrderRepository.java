@@ -26,9 +26,9 @@ public class OrderRepository {
         return EntityMapper.map(entityManager.find(OrderDAO.class, id));
     }
 
-    public UUID save(Order order) {
+    public UUID create(UUID customerId) {
 
-        CustomerDAO cDao = entityManager.find(CustomerDAO.class, order.getCustomerID());
+        CustomerDAO cDao = entityManager.find(CustomerDAO.class, customerId);
 
         OrderDAO orderDAO = new OrderDAO();
         orderDAO.setCustomer(cDao);

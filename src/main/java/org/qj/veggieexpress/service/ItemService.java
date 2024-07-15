@@ -1,5 +1,6 @@
 package org.qj.veggieexpress.service;
 
+import org.qj.veggieexpress.controller.dto.NewItemRequestDTO;
 import org.qj.veggieexpress.entity.Item;
 import org.qj.veggieexpress.repository.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -29,14 +30,15 @@ public class ItemService {
         //future exception here
     }
 
-    public UUID save(String name, String description) {
+    public UUID create(NewItemRequestDTO dto) {
         Item item = Item.builder()
                 //.itemId(UUID.randomUUID())
-                .itemName(name)
-                .itemDescription(description)
+                .itemName(dto.itemName())
+                .itemDescription(dto.itemDescription())
                 .itemAvailable(true)
                 .build();
 
         return itemRepository.addItem(item);
     }
+
 }

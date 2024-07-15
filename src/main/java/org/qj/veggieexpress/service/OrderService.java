@@ -1,5 +1,6 @@
 package org.qj.veggieexpress.service;
 
+import org.qj.veggieexpress.controller.dto.NewOrderRequestDTO;
 import org.qj.veggieexpress.entity.Order;
 import org.qj.veggieexpress.repository.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class OrderService {
         return orderRepository.getOrderById(id);
     }
 
-    public UUID addOrder(Order order) {
-        return orderRepository.save(order);
+    public UUID createOrder(NewOrderRequestDTO orderRequestDTO) {
+        return orderRepository.create(UUID.fromString(orderRequestDTO.customerId()));
     }
 }

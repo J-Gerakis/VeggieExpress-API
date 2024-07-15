@@ -1,13 +1,14 @@
 package org.qj.veggieexpress.mapper;
 
+import org.qj.veggieexpress.entity.Customer;
 import org.qj.veggieexpress.entity.Item;
 import org.qj.veggieexpress.entity.Order;
 import org.qj.veggieexpress.entity.OrderItem;
+import org.qj.veggieexpress.repository.dao.CustomerDAO;
 import org.qj.veggieexpress.repository.dao.ItemDAO;
 import org.qj.veggieexpress.repository.dao.OrderDAO;
 import org.qj.veggieexpress.repository.dao.OrderItemDAO;
 
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class EntityMapper {
@@ -47,6 +48,16 @@ public class EntityMapper {
                 .orderContent(dao.getOrderItemDAO().stream().map(EntityMapper::map).collect(Collectors.toSet()))
                 .createdOn(dao.getCreatedOn())
                 .deliveredOn(dao.getDeliveredOn())
+                .build();
+    }
+
+    public static Customer map(CustomerDAO dao) {
+        return Customer.builder()
+                .customerId(dao.getCustomerId())
+                .name(dao.getCustomerName())
+                .address(dao.getCustomerDeliveryAddress())
+                .phone(dao.getCustomerPhone())
+                .note(dao.getCustomerNote())
                 .build();
     }
 

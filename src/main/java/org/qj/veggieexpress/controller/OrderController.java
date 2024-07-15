@@ -1,8 +1,10 @@
 package org.qj.veggieexpress.controller;
 
+import org.qj.veggieexpress.controller.dto.NewOrderRequestDTO;
 import org.qj.veggieexpress.entity.Order;
 import org.qj.veggieexpress.service.OrderService;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -21,5 +23,10 @@ public class OrderController {
     public Order getOrderById(@Argument String id) {
         UUID uuid = UUID.fromString(id);
         return orderService.getOrderById(uuid);
+    }
+
+    @MutationMapping
+    public UUID createOrder(@Argument NewOrderRequestDTO orderRequest) {
+        return orderService.createOrder(orderRequest);
     }
 }
