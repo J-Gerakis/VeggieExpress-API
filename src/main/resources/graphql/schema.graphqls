@@ -27,15 +27,21 @@ input NewItemRequestDTO{
     itemDescription:String
 }
 
+input NewOrderItemRequestDTO {
+    orderId:ID
+    quantity:Int
+}
+
 input NewOrderRequestDTO  {
     customerId:String
-    orderContent:String
+    orderContent: [NewOrderItemRequestDTO]
 }
 
 input NewCustomerRequestDTO {
     name:String
     phone:String
     address:String
+    note:String
 
 }
 
@@ -50,5 +56,5 @@ type Query {
 type Mutation {
     addItem(itemRequest:NewItemRequestDTO): ID
     createOrder(orderRequest:NewOrderRequestDTO): ID
-    createCustomer: ID
+    createCustomer(customerRequest:NewCustomerRequestDTO): ID
 }

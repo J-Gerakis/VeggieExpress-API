@@ -44,7 +44,7 @@ public class EntityMapper {
                 .orderID(dao.getOrderId())
                 .customerID(dao.getCustomer().getCustomerId())
                 .deliveryAddress(dao.getCustomer().getCustomerDeliveryAddress())
-                .note(dao.getCustomer().getCustomerNote())
+                .note(dao.getDeliveryNote())
                 .orderContent(dao.getOrderItemDAO().stream().map(EntityMapper::map).collect(Collectors.toSet()))
                 .createdOn(dao.getCreatedOn())
                 .deliveredOn(dao.getDeliveredOn())

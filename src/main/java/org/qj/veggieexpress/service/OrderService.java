@@ -21,6 +21,6 @@ public class OrderService {
     }
 
     public UUID createOrder(NewOrderRequestDTO orderRequestDTO) {
-        return orderRepository.create(UUID.fromString(orderRequestDTO.customerId()));
+        return orderRepository.create(orderRequestDTO);
     }
 }

@@ -38,5 +38,8 @@ public class OrderDAO {
     @Column(name = "delivered_on")
     LocalDateTime deliveredOn;
 
+    @Column(name = "delivery_note")
+    String deliveryNote;
+
     public OrderDAO() {}
 }
