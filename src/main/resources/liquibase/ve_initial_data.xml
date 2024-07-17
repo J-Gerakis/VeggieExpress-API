@@ -15,5 +15,12 @@
         <column name="item_name" type="STRING"/>
         <column name="item_description" type="STRING"/>
     </loadData>
+    <insert tableName="Customer">
+        <column name="customer_id" value="a5dd90ca-e663-41c3-99f9-98443740a190" />
+        <column name="customer_contact_name" value="David Wong" />
+        <column name="customer_phone" value="0855550555" />
+        <column name="customer_delivery_address" value="23 Main street" />
+        <column name="customer_note" value="null" />
+    </insert>
 </changeSet>
 </databaseChangeLog>

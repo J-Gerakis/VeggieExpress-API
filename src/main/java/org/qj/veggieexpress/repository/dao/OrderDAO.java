@@ -12,6 +12,7 @@ import java.util.UUID;
 @Table(name = "VOrder")
 @Getter
 @Setter
+@NamedQuery(name="getAllOrders", query="select i from OrderDAO i")
 public class OrderDAO {
     @Id
     @Column(name = "order_id")

@@ -16,6 +16,10 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    public Customer getCustomerById(UUID customerId) {
+        return customerRepository.getCustomerById(customerId);
+    }
+
     public UUID create(NewCustomerDTO customerDTO) {
         Customer customer = Customer.builder()
                 .name(customerDTO.name())

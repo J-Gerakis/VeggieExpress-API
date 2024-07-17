@@ -5,6 +5,7 @@ import org.qj.veggieexpress.entity.Order;
 import org.qj.veggieexpress.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +19,10 @@ public class OrderService {
 
     public Order getOrderById(UUID id) {
         return orderRepository.getOrderById(id);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.getAll();
     }
 
     public UUID createOrder(NewOrderRequestDTO orderRequestDTO) {

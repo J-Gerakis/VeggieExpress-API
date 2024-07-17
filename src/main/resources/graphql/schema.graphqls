@@ -22,6 +22,14 @@ type Order {
     paid: Boolean
 }
 
+type Customer {
+    customerId: ID!
+    name: String
+    phone: String
+    address: String
+    note: String
+}
+
 input NewItemRequestDTO{
     itemName:String
     itemDescription:String
@@ -29,11 +37,12 @@ input NewItemRequestDTO{
 
 input NewOrderItemRequestDTO {
     orderId:ID
+    itemId:ID
     quantity:Int
 }
 
 input NewOrderRequestDTO  {
-    customerId:String
+    customerId:ID
     orderContent: [NewOrderItemRequestDTO]
 }
 
@@ -42,7 +51,6 @@ input NewCustomerRequestDTO {
     phone:String
     address:String
     note:String
-
 }
 
 
@@ -50,7 +58,9 @@ type Query {
     listAllItems: [Item]
     getItemById(id:String): Item
     searchItem(searchTerm:String): [Item]
-    getOrderById(id:String): Order
+    getCustomerById(id:ID): Customer
+    getOrderById(id:ID): Order
+    listAllOrders: [Order]
 }
 
 type Mutation {

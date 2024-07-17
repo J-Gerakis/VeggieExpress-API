@@ -8,6 +8,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -20,13 +21,19 @@ public class OrderController {
     }
 
     @QueryMapping
-    public Order getOrderById(@Argument String id) {
-        UUID uuid = UUID.fromString(id);
-        return orderService.getOrderById(uuid);
+    public Order getOrderById(@Argument UUID id) {
+        //UUID uuid = UUID.fromString(id);
+        return orderService.getOrderById(id);
+    }
+
+    @QueryMapping
+    public List<Order> listAllOrders() {
+        return orderService.getAllOrders();
     }
 
     @MutationMapping
     public UUID createOrder(@Argument NewOrderRequestDTO orderRequest) {
         return orderService.createOrder(orderRequest);
     }
+
 }

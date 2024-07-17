@@ -17,7 +17,7 @@ public class CustomerDAO {
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID customerId;
 
-    @Column(name = "customer_name")
+    @Column(name = "customer_contact_name")
     String customerName;
 
     @Column(name = "customer_phone")

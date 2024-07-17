@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class EntityMapper {
     public static Item map(ItemDAO dao) {
+        if (dao == null) { return Item.builder().build(); }
         return Item.builder()
                 .itemId(dao.getItemId())
                 .itemName(dao.getItemName())
@@ -23,6 +24,7 @@ public class EntityMapper {
 
     public static ItemDAO map(Item item) {
         ItemDAO dao = new ItemDAO();
+        if (item == null) return dao;
         dao.setItemId(item.getItemId());
         dao.setItemName(item.getItemName());
         dao.setItemDesc(item.getItemDescription());
@@ -31,6 +33,7 @@ public class EntityMapper {
     }
 
     public static OrderItem map(OrderItemDAO dao) {
+        if (dao == null) { return OrderItem.builder().build(); }
         return OrderItem.builder()
                 .item(map(dao.getItem()))
                 .quantity(dao.getQuantity())
@@ -40,6 +43,7 @@ public class EntityMapper {
     }
 
     public static Order map(OrderDAO dao) {
+        if (dao == null) { return Order.builder().build(); }
         return Order.builder()
                 .orderID(dao.getOrderId())
                 .customerID(dao.getCustomer().getCustomerId())
@@ -52,6 +56,7 @@ public class EntityMapper {
     }
 
     public static Customer map(CustomerDAO dao) {
+        if (dao == null) { return Customer.builder().build(); }
         return Customer.builder()
                 .customerId(dao.getCustomerId())
                 .name(dao.getCustomerName())

@@ -2,12 +2,14 @@ package org.qj.veggieexpress.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.qj.veggieexpress.controller.dto.NewOrderRequestDTO;
 import org.qj.veggieexpress.entity.Order;
 import org.qj.veggieexpress.entity.OrderItem;
 import org.qj.veggieexpress.mapper.EntityMapper;
 import org.qj.veggieexpress.repository.dao.CustomerDAO;
+import org.qj.veggieexpress.repository.dao.ItemDAO;
 import org.qj.veggieexpress.repository.dao.OrderDAO;
 import org.qj.veggieexpress.repository.dao.OrderItemDAO;
 import org.springframework.stereotype.Repository;
@@ -29,6 +31,13 @@ public class OrderRepository {
 
     public Order getOrderById(UUID id) {
         return EntityMapper.map(entityManager.find(OrderDAO.class, id));
+    }
+
+    public Order getOrderByCustomerId(UUID customerId) { return null; }
+
+    public List<Order> getAll(){
+        TypedQuery<OrderDAO> query1 = entityManager.createNamedQuery("getAllOrders", OrderDAO.class);
+        return query1.getResultList().stream().map(EntityMapper::map).toList();
     }
 
     public UUID create(NewOrderRequestDTO orderRequestDTO) {
