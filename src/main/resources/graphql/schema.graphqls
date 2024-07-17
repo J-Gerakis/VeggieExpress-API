@@ -1,3 +1,7 @@
+type Message {
+    content:String
+    isError:Boolean
+}
 
 type Item {
     itemId: ID!
@@ -72,8 +76,8 @@ type Query {
 
 type Mutation {
     addItem(itemRequest:NewItemRequestDTO): ID
-    updateItem(itemRequest:UpdateItemDTO): String
-    changeItemAvailability(itemId:ID!, isAvailable:Boolean): String
+    updateItem(itemRequest:UpdateItemDTO): Message
+    changeItemAvailability(itemId:ID!, isAvailable:Boolean): Message
     createOrder(orderRequest:NewOrderRequestDTO): ID
     createCustomer(customerRequest:NewCustomerRequestDTO): ID
 }

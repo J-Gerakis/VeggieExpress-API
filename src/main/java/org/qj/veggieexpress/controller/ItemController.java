@@ -3,6 +3,7 @@ package org.qj.veggieexpress.controller;
 import org.qj.veggieexpress.controller.dto.NewItemRequestDTO;
 import org.qj.veggieexpress.controller.dto.UpdateItemDTO;
 import org.qj.veggieexpress.entity.Item;
+import org.qj.veggieexpress.entity.Message;
 import org.qj.veggieexpress.service.ItemService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -42,14 +43,14 @@ public class ItemController {
     }
 
     @MutationMapping
-    public String updateItem(@Argument UpdateItemDTO itemRequest) {
+    public Message updateItem(@Argument UpdateItemDTO itemRequest) {
         itemService.update(itemRequest);
-        return "done";
+        return new Message("done");
     }
 
     @MutationMapping
-    public String changeItemAvailability(@Argument UUID itemId, @Argument boolean isAvailable) {
+    public Message changeItemAvailability(@Argument UUID itemId, @Argument boolean isAvailable) {
         itemService.updateAvailability(itemId, isAvailable);
-        return "done";
+        return new Message("done");
     }
 }
