@@ -1,6 +1,7 @@
 package org.qj.veggieexpress.service;
 
 import org.qj.veggieexpress.controller.dto.NewItemRequestDTO;
+import org.qj.veggieexpress.controller.dto.UpdateItemDTO;
 import org.qj.veggieexpress.entity.Item;
 import org.qj.veggieexpress.repository.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,19 @@ public class ItemService {
 
     public List<Item> search(String term) {
         return itemRepository.findByName(term);
+    }
+
+    public void update(UpdateItemDTO updateRequest) {
+      Item item = Item.builder()
+              .itemId(updateRequest.itemId())
+              .itemName(updateRequest.itemNewName())
+              .itemDescription(updateRequest.itemNewDescription())
+              .build();
+      itemRepository.updateItem(item);
+    }
+
+    public void updateAvailability(UUID itemId, Boolean availability) {
+        itemRepository.updateItemAvailability(itemId, availability);
     }
 
     public Item getById(UUID id) {

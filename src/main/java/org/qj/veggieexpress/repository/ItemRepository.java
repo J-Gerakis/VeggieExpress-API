@@ -48,4 +48,24 @@ public class ItemRepository {
         return Optional.of(EntityMapper.map(dao));
     }
 
+    public void updateItem(Item item) {
+        ItemDAO dao = entityManager.find(ItemDAO.class, item.getItemId());
+        if (dao == null) { return ; }
+        if(item.getItemName() != null) {
+            dao.setItemName(item.getItemName());
+        }
+        if(item.getItemDescription() != null) {
+            dao.setItemDesc(item.getItemDescription());
+        }
+
+        entityManager.merge(dao);
+    }
+
+    public void updateItemAvailability(UUID id, boolean availability) {
+        ItemDAO dao = entityManager.find(ItemDAO.class, id);
+        if (dao == null) { return ; }
+        dao.setItemAvailable(availability);
+        entityManager.merge(dao);
+    }
+
 }
