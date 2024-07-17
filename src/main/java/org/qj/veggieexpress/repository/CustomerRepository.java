@@ -2,6 +2,7 @@ package org.qj.veggieexpress.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.qj.veggieexpress.entity.Customer;
 import org.qj.veggieexpress.mapper.EntityMapper;
@@ -19,6 +20,12 @@ public class CustomerRepository {
 
     public Customer getCustomerById(UUID id) {
         return EntityMapper.map(entityManager.find(CustomerDAO.class, id));
+    }
+
+    public Customer getCustomerByPhone(String phone) {
+        TypedQuery<CustomerDAO> query = entityManager.createNamedQuery("Customer.findByPhone", CustomerDAO.class);
+        query.setParameter("phone", phone);
+        return EntityMapper.map(query.getSingleResult());
     }
 
     public UUID addCustomer(Customer customer) {

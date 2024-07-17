@@ -24,13 +24,13 @@ public class ItemRepository {
     public ItemRepository() { }
 
     public List<Item> findAll() {
-        TypedQuery<ItemDAO> query1 = entityManager.createNamedQuery("getAllItem", ItemDAO.class);
+        TypedQuery<ItemDAO> query1 = entityManager.createNamedQuery("Item.getAllItem", ItemDAO.class);
         return query1.getResultList().stream().map(EntityMapper::map).toList();
     }
 
     public List<Item> findByName(String name) {
-        TypedQuery<ItemDAO> squery = entityManager.createNamedQuery("getItemByName", ItemDAO.class)
-                .setParameter("name", "'%"+name+"%'");
+        TypedQuery<ItemDAO> squery = entityManager.createNamedQuery("Item.getItemByName", ItemDAO.class)
+                .setParameter("name", "%"+name+"%");
 
         return squery.getResultList().stream().map(EntityMapper::map).toList();
     }

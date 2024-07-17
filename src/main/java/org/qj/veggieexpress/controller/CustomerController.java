@@ -23,6 +23,11 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
+    @QueryMapping
+    public Customer getCustomerByPhone(@Argument String phone) {
+        return customerService.getCustomerByPhone(phone);
+    }
+
     @MutationMapping
     public UUID createCustomer(@Argument NewCustomerDTO customerRequest) {
         return customerService.create(customerRequest);

@@ -20,6 +20,10 @@ public class CustomerService {
         return customerRepository.getCustomerById(customerId);
     }
 
+    public Customer getCustomerByPhone(String customerPhone) {
+        return customerRepository.getCustomerByPhone(customerPhone);
+    }
+
     public UUID create(NewCustomerDTO customerDTO) {
         Customer customer = Customer.builder()
                 .name(customerDTO.name())

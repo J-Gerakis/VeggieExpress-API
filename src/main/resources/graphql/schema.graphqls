@@ -59,6 +59,7 @@ type Query {
     getItemById(id:String): Item
     searchItem(searchTerm:String): [Item]
     getCustomerById(id:ID): Customer
+    getCustomerByPhone(phone:String): Customer
     getOrderById(id:ID): Order
     listAllOrders: [Order]
 }

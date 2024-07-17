@@ -10,6 +10,7 @@ import java.util.UUID;
 @Table(name = "Customer")
 @Getter
 @Setter
+@NamedQuery(name="Customer.findByPhone", query="select i from CustomerDAO i where customerPhone = :phone")
 public class CustomerDAO {
 
     @Id
