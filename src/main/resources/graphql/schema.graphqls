@@ -39,7 +39,7 @@ input NewItemRequestDTO{
     itemDescription:String
 }
 
-input UpdateItemDTO {
+input UpdateItemRequestDTO {
     itemId: ID!
     itemNewName:String
     itemNewDescription:String
@@ -76,8 +76,9 @@ type Query {
 
 type Mutation {
     addItem(itemRequest:NewItemRequestDTO): ID
-    updateItem(itemRequest:UpdateItemDTO): Message
+    updateItem(itemRequest:UpdateItemRequestDTO): Message
     changeItemAvailability(itemId:ID!, isAvailable:Boolean): Message
     createOrder(orderRequest:NewOrderRequestDTO): ID
+    addItemToOrder(itemToAdd:NewOrderItemRequestDTO!): Message
     createCustomer(customerRequest:NewCustomerRequestDTO): ID
 }

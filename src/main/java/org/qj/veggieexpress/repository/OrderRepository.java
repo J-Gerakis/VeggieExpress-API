@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import org.qj.veggieexpress.controller.dto.NewOrderItemRequestDTO;
 import org.qj.veggieexpress.controller.dto.NewOrderRequestDTO;
 import org.qj.veggieexpress.entity.Order;
 import org.qj.veggieexpress.entity.OrderItem;
@@ -14,8 +15,10 @@ import org.qj.veggieexpress.repository.dao.OrderDAO;
 import org.qj.veggieexpress.repository.dao.OrderItemDAO;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -29,11 +32,15 @@ public class OrderRepository {
 
     public OrderRepository() {}
 
-    public Order getOrderById(UUID id) {
-        return EntityMapper.map(entityManager.find(OrderDAO.class, id));
+    public Optional<Order> getOrderById(UUID id) {
+        OrderDAO orderDAO = entityManager.find(OrderDAO.class, id);
+        if (orderDAO == null) {
+            return Optional.empty();
+        }
+        return Optional.of(EntityMapper.map(entityManager.find(OrderDAO.class, id)));
     }
 
-    public Order getOrderByCustomerId(UUID customerId) { return null; }
+    public List<Order> getOrdersByCustomerId(UUID customerId) { return null; }
 
     public List<Order> getAll(){
         TypedQuery<OrderDAO> query1 = entityManager.createNamedQuery("getAllOrders", OrderDAO.class);
@@ -55,6 +62,15 @@ public class OrderRepository {
         entityManager.persist(orderDAO);
         entityManager.flush();
         return orderDAO.getOrderId();
+    }
+
+    public void addToOrder(NewOrderItemRequestDTO orderItemRequestDTO) {
+        OrderItemDAO orderItemDAO = new OrderItemDAO();
+        orderItemDAO.setOrderId(orderItemRequestDTO.orderId());
+        orderItemDAO.setQuantity(orderItemRequestDTO.quantity());
+        orderItemDAO.setItem(entityManager.find(ItemDAO.class, orderItemRequestDTO.itemId()));
+        entityManager.persist(orderItemDAO);
+        entityManager.flush();
     }
 
     private Set<OrderItemDAO> convertList(List<OrderItem> itemList) {

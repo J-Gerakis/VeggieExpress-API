@@ -1,12 +1,13 @@
 package org.qj.veggieexpress.service;
 
 import org.qj.veggieexpress.controller.dto.NewItemRequestDTO;
-import org.qj.veggieexpress.controller.dto.UpdateItemDTO;
+import org.qj.veggieexpress.controller.dto.UpdateItemRequestDTO;
 import org.qj.veggieexpress.entity.Item;
 import org.qj.veggieexpress.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,7 +27,7 @@ public class ItemService {
         return itemRepository.findByName(term);
     }
 
-    public void update(UpdateItemDTO updateRequest) {
+    public void update(UpdateItemRequestDTO updateRequest) {
       Item item = Item.builder()
               .itemId(updateRequest.itemId())
               .itemName(updateRequest.itemNewName())
@@ -39,9 +40,8 @@ public class ItemService {
         itemRepository.updateItemAvailability(itemId, availability);
     }
 
-    public Item getById(UUID id) {
-        return itemRepository.findItemById(id).orElse(null);
-        //future exception here
+    public Optional<Item> getById(UUID id) {
+        return itemRepository.findItemById(id);
     }
 
     public UUID create(NewItemRequestDTO dto) {
